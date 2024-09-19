@@ -1,12 +1,12 @@
 <?php
-class Controller {
+abstract class Controller {
+   
      public function view($view, $data = [])
      {
-        extract($data);
-        require_once '../app/views/' . $view . '.php';
+        view($view, $data);
      }
 
-     public function model($model)
+     public function model($modelClassName)
      {
         require_once '../app/models/' . $model . '.php';
         return new $model;

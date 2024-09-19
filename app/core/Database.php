@@ -4,14 +4,14 @@ class Database {
     private $host = DB_HOST;
     private $user = DB_USER;
     private $pass = DB_PASS;
-    private $db_name = DB_NAME;
+    private $dbName = DB_NAME;
 
-    private $dbh;
-    private $stmt;
+    public $dbh;
+    public $stmt;
 
     public function __construct()
     {
-        $dsn = 'mysql:host=' . $this->host . ';dbname=' . $this->db_name ;
+        $dsn = 'mysql:host=' . $this->host . ';dbname=' . $this->dbName ;
 
         $option = [
             PDO::ATTR_PERSISTENT => true,
@@ -49,7 +49,7 @@ class Database {
     }
     public function execute()
     {
-        $this->stmt->execute();
+       return $this->stmt->execute();
     }
     public function resultSet()
     {
@@ -65,5 +65,10 @@ class Database {
     public function rowCount()
     {
         return $this->stmt->rowCount();
+    }
+
+
+    public function getLastInsertedId(){
+        return $this->dbh->lastInsertId();
     }
 }

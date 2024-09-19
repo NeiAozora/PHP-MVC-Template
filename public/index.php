@@ -1,7 +1,4 @@
 <?php
 
-$url = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-
-require_once '../app/init.php';
-
-$app = new App;
+header("HTTP/1.0 404 Not Found");
+echo "Error 404: File not found - " . htmlspecialchars($this->currentPath);
