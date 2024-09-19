@@ -63,27 +63,32 @@ class Router {
 
         $this->currentMethod = $_SERVER['REQUEST_METHOD'];
         $this->currentPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-
+    
+        // Handle empty path by redirecting to homepage ('/')
+        if ($this->currentPath === '') {
+            $this->currentPath = '/';
+        }
+    
         // if (!WEB_DOMAIN_MODE) {
         //     $this->currentPath = str_replace("/Laos-Merch/public", "", $this->currentPath);
         //     $this->currentPath = str_replace("/Laos-Merch", "", $this->currentPath);
         // }
-
+    
         $publicDir = ROOT . '/public';
         $filePath = $publicDir . $this->currentPath;
-
+    
         if (file_exists($filePath) && is_file($filePath)) {
             $this->serveStaticFile($filePath);
             return;
         } elseif (strpos($this->currentPath, '/public/') === 0) {
             throw new Exception("Target file '$filePath' tidak ada: " . $this->currentPath);
         }
-
+    
         // Apply global middlewares
         foreach ($this->globalMiddlewares as $middleware) {
             call_user_func($middleware);
         }
-
+    
         try {
             if (isset($this->routes[$this->currentMethod])) {
                 $routeFound = false;
@@ -93,7 +98,7 @@ class Router {
                         $routeFound = true;
                         array_shift($matches); // Remove the full match
                         $params = $matches;
-
+    
                         foreach ($route['middlewares'] as $middleware) {
                             call_user_func($middleware);
                         }
@@ -111,7 +116,7 @@ class Router {
             $this->handleException($e);
         }
     }
-
+    
     private function serveStaticFile(string $filePath): void {
         $fileInfo = pathinfo($filePath);
         $extension = isset($fileInfo['extension']) ? $fileInfo['extension'] : '';
