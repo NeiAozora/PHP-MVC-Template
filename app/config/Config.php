@@ -1,16 +1,25 @@
 <?php
 
-define ('BASEURL', $url);
+// jika dipakai mode deploy ke web
+define('WEB_DOMAIN_MODE', false);
 
-define("ROOT", dirname(dirname(__DIR__)));
+$host = $_SERVER['HTTP_HOST'];
+
+define("ROOT", dirname(dirname(__DIR__))) . "/";
+define("ROOT_DIRECTORY_NAME", basename(ROOT));
+
+if (WEB_DOMAIN_MODE) {
+    define ('BASEURL', "https://www.example.com"); // MASUKAN URL WEB DARI WEBSITE YANG DIPAKAI
+} else {
+    define('BASEURL', "http://localhost/" . ROOT_DIRECTORY_NAME . "/");
+}
+
 define("VIEWS", ROOT . "/views/");
 
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
 define('DB_PASS', '');
 define('DB_NAME', 'laos_merch');
-
-
 
 
 // PATCHING INCOSYSTENCY OF DATETIME PROBLEM

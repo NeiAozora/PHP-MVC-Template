@@ -7,8 +7,8 @@ $url = $protocol . '://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
 global $url;
 
 // Include necessary files
-require_once 'app/init.php';
 require_once 'vendor/autoload.php';
+require_once 'app/init.php';
 
 // Initialize the app
 $app = new App;

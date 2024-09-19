@@ -68,11 +68,13 @@ class Router {
         if ($this->currentPath === '') {
             $this->currentPath = '/';
         }
-    
-        // if (!WEB_DOMAIN_MODE) {
-        //     $this->currentPath = str_replace("/Laos-Merch/public", "", $this->currentPath);
-        //     $this->currentPath = str_replace("/Laos-Merch", "", $this->currentPath);
-        // }
+
+        
+        // Diperuntukan jika memakai XAMPP di htdocs dan masuk ke sub-directory untuk masuk ke aplikasi
+        if (!WEB_DOMAIN_MODE) {
+            $this->currentPath = str_replace("/" . ROOT_DIRECTORY_NAME . "/public", "", $this->currentPath);
+            $this->currentPath = str_replace("/" . ROOT_DIRECTORY_NAME . "", "", $this->currentPath);
+        }
     
         $publicDir = ROOT . '/public';
         $filePath = $publicDir . $this->currentPath;

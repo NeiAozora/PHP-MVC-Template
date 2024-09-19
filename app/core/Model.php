@@ -8,6 +8,8 @@ abstract class Model
 
     protected $db;
 
+    use StaticInstantiator;
+
     public function __construct()
     {
         $this->db = new Database;
