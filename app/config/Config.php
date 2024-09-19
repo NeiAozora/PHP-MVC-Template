@@ -8,11 +8,11 @@ define("ROOT", dirname(dirname(__DIR__)) . "/");
 define("ROOT_DIRECTORY_NAME", basename(ROOT));
 define("VIEWS", ROOT . "views/");
 
-// Konfigurasi
+// Konfigurasi Database 
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
 define('DB_PASS', '');
-define('DB_NAME', 'NAMA TABELMU');
+define('DB_NAME', 'NAMA_DB_MU');
 
 // Pengaturan URL dasar
 $host = $_SERVER['HTTP_HOST'];
